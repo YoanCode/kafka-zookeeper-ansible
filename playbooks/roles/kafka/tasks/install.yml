@@ -6,6 +6,14 @@
     remote_src: yes
     creates: "{{ kafka_install_dir }}/"
 
+- name: "[Kafka] Set ownership of Kafka installation directory"
+  ansible.builtin.file:
+    path: "{{ global_install_dir }}/kafka_2.13-{{ kafka_version }}"
+    owner: "{{ kafka_user }}"
+    group: "{{ os_group }}"
+    state: directory
+    recurse: yes
+
 - name: "[Kafka] Create a symlink to the Kafka directory"
   ansible.builtin.file:
     src: "{{ global_install_dir }}/kafka_2.13-{{ kafka_version }}"

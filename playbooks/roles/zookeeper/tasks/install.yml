@@ -6,6 +6,14 @@
     remote_src: yes
     creates: "{{ zk_install_dir }}/"
 
+- name: "[Zookeeper] Set ownership of Zookeeper installation directory"
+  ansible.builtin.file:
+    path: "{{ global_install_dir }}/apache-zookeeper-{{ zk_version }}-bin"
+    owner: "{{ zk_user }}"
+    group: "{{ os_group }}"
+    state: directory
+    recurse: yes
+
 - name: "[Zookeeper] Create a symlink to the Zookeeper directory"
   ansible.builtin.file:
     src: "{{ global_install_dir }}/apache-zookeeper-{{ zk_version }}-bin"
