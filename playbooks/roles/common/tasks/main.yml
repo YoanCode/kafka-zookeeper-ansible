@@ -1,0 +1,12 @@
+---
+- name: "Create global directories"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - "{{ global_install_dir }}"
+    - "{{ global_data_dir }}"
+    - "{{ global_log_dir }}"

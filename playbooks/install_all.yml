@@ -1,13 +1,17 @@
 ---
-## 執行 ansible-playbook -i inventory/hosts.ini playbooks/install_zookeeper.yml --limit 192.168.200.20
+## 執行 ansible-playbook -i inventory/hosts.ini playbooks/install_zookeeper.yml -t kafka --limit 192.168.200.20 
 - name: Deploy Zookeeper Cluster
   hosts: zookeepers
   become: yes
+  tags: [zookeeper]
   roles:
+    - role: common
     - role: zookeeper
 
 - name: Deploy Kafka Cluster
   hosts: kafka_brokers
   become: yes
+  tags: [kafka]
   roles:
+    - role: common
     - role: kafka

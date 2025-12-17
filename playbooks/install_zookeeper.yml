@@ -1,6 +1,0 @@
----
-- name: Deploy Zookeeper Cluster
-  hosts: zookeepers
-  become: yes
-  roles:
-    - role: zookeeper
