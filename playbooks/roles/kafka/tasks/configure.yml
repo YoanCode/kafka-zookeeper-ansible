@@ -1,17 +1,4 @@
 ---
-- name: "[Kafka] Ensure os_group exists"
-  ansible.builtin.group:
-    name: "{{ os_group }}"
-    state: present
-
-- name: "[Kafka] Ensure kafka_user exists"
-  ansible.builtin.user:
-    name: "{{ kafka_user }}"
-    group: "{{ os_group }}"
-    shell: /sbin/nologin
-    system: yes
-    state: present
-
 - name: "[Kafka] Ensure Kafka log directories exist"
   ansible.builtin.file:
     path: "{{ item }}"

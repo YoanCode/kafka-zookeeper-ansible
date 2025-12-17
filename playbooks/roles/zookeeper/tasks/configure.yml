@@ -1,17 +1,4 @@
 ---
-- name: "[Zookeeper] Ensure os_group exists"
-  ansible.builtin.group:
-    name: "{{ os_group }}"
-    state: present
-
-- name: "[Zookeeper] Ensure zk_user exists"
-  ansible.builtin.user:
-    name: "{{ zk_user }}"
-    group: "{{ os_group }}"
-    shell: /sbin/nologin
-    system: yes
-    state: present
-
 - name: "[Zookeeper] Ensure Zookeeper directories exist"
   ansible.builtin.file:
     path: "{{ item }}"

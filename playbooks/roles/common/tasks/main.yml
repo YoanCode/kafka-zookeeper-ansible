@@ -10,3 +10,24 @@
     - "{{ global_install_dir }}"
     - "{{ global_data_dir }}"
     - "{{ global_log_dir }}"
+
+- name: "Ensure os_group exists"
+  ansible.builtin.group:
+    name: "{{ os_group }}"
+    state: present
+
+- name: "Ensure Zookeeper user exists"
+  ansible.builtin.user:
+    name: "{{ zk_user }}"
+    group: "{{ os_group }}"
+    shell: /sbin/nologin
+    system: yes
+    state: present
+
+- name: "Ensure Kafka user exists"
+  ansible.builtin.user:
+    name: "{{ kafka_user }}"
+    group: "{{ os_group }}"
+    shell: /sbin/nologin
+    system: yes
+    state: present
