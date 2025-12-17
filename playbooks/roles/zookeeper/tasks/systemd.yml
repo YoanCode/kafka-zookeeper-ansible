@@ -7,11 +7,12 @@
     group: root
     mode: '0644'
   notify: Restart Zookeeper
+  register: zookeeper_service_file
 
 - name: "[Zookeeper] Systemd daemon-reload"
   ansible.builtin.systemd:
     daemon_reload: yes
-  when: "zookeeper_service_status.changed"
+  when: zookeeper_service_file.changed
 
 - name: "[Zookeeper] Start and enable Zookeeper service"
   ansible.builtin.systemd:

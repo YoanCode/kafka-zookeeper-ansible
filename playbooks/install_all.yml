@@ -1,5 +1,5 @@
 ---
-## 執行 ansible-playbook -i inventory/hosts.ini playbooks/install_all.yml
+## 執行 ansible-playbook -i inventory/hosts.ini playbooks/install_zookeeper.yml --limit 192.168.200.20
 - name: Deploy Zookeeper Cluster
   hosts: zookeepers
   become: yes
