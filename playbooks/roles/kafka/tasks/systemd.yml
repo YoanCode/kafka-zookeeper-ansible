@@ -7,11 +7,12 @@
     group: root
     mode: '0644'
   notify: Restart Kafka
+  register: kafka_service_file
 
 - name: "[Kafka] Systemd daemon-reload"
   ansible.builtin.systemd:
     daemon_reload: yes
-  when: "kafka_service_status.changed"
+  when: kafka_service_file.changed
 
 - name: "[Kafka] Start and enable Kafka service"
   ansible.builtin.systemd:
