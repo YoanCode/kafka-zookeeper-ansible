@@ -1,0 +1,43 @@
+---
+- name: "[Zookeeper] Ensure os_group exists"
+  ansible.builtin.group:
+    name: "{{ os_group }}"
+    state: present
+
+- name: "[Zookeeper] Ensure zk_user exists"
+  ansible.builtin.user:
+    name: "{{ zk_user }}"
+    group: "{{ os_group }}"
+    shell: /sbin/nologin
+    system: yes
+    state: present
+
+- name: "[Zookeeper] Ensure Zookeeper directories exist"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ zk_user }}"
+    group: "{{ os_group }}"
+    mode: '0755'
+  loop:
+    - "{{ zk_data_dir }}"
+    - "{{ zk_data_log_dir }}"
+    - "{{ zk_log_dir }}"
+
+- name: "[Zookeeper] Create myid file"
+  ansible.builtin.template:
+    src: myid.j2
+    dest: "{{ zk_data_dir }}/myid"
+    owner: "{{ zk_user }}"
+    group: "{{ os_group }}"
+    mode: '0644'
+  notify: Restart Zookeeper
+
+- name: "[Zookeeper] Create zoo.cfg configuration file"
+  ansible.builtin.template:
+    src: zoo.cfg.j2
+    dest: "{{ zk_install_dir }}/conf/zoo.cfg"
+    owner: "{{ zk_user }}"
+    group: "{{ os_group }}"
+    mode: '0644'
+  notify: Restart Zookeeper

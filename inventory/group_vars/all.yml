@@ -1,0 +1,9 @@
+---
+# 全域變數 / Global Variables
+java_home: /usr/lib/jvm/temurin-11-jdk
+ansible_user: itadmin
+ansible_private_key_file: /home/itadmin/.ssh/id_ed25519
+os_group: kafka
+global_install_dir: /opt/sw
+global_data_dir: /data
+global_log_dir: /logs

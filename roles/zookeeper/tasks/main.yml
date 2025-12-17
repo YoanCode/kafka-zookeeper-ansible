@@ -1,0 +1,12 @@
+---
+- name: Include install tasks
+  import_tasks: install.yml
+  tags: [zookeeper, zookeeper-install]
+
+- name: Include configure tasks
+  import_tasks: configure.yml
+  tags: [zookeeper, zookeeper-configure]
+
+- name: Include systemd tasks
+  import_tasks: systemd.yml
+  tags: [zookeeper, zookeeper-systemd]

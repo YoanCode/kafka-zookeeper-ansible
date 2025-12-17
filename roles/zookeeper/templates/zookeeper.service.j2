@@ -1,0 +1,20 @@
+# zookeeper.service.j2
+[Unit]
+Description=Apache Zookeeper server
+Documentation=http://zookeeper.apache.org
+Requires=network.target
+After=network.target
+
+[Service]
+Type=forking
+User={{ zk_user }}
+Group={{ os_group }}
+Environment="JAVA_HOME={{ java_home }}"
+ExecStart={{ zk_install_dir }}/bin/zkServer.sh start
+ExecStop={{ zk_install_dir }}/bin/zkServer.sh stop
+ExecReload={{ zk_install_dir }}/bin/zkServer.sh restart
+WorkingDirectory={{ zk_install_dir }}
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target

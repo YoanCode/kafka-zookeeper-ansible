@@ -1,0 +1,19 @@
+# kafka.service.j2
+[Unit]
+Description=Apache Kafka server
+Documentation=http://kafka.apache.org/documentation.html
+Requires=zookeeper.service
+After=zookeeper.service
+
+[Service]
+Type=forking
+User={{ kafka_user }}
+Group={{ os_group }}
+Environment="JAVA_HOME={{ java_home }}"
+Environment="KAFKA_HEAP_OPTS={{ kafka_heap_opts }}"
+ExecStart={{ kafka_install_dir }}/bin/kafka-server-start.sh {{ kafka_install_dir }}/config/server.properties
+ExecStop={{ kafka_install_dir }}/bin/kafka-server-stop.sh
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,31 @@
+---
+- name: "[Kafka] Ensure os_group exists"
+  ansible.builtin.group:
+    name: "{{ os_group }}"
+    state: present
+
+- name: "[Kafka] Ensure kafka_user exists"
+  ansible.builtin.user:
+    name: "{{ kafka_user }}"
+    group: "{{ os_group }}"
+    shell: /sbin/nologin
+    system: yes
+    state: present
+
+- name: "[Kafka] Ensure Kafka log directories exist"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ kafka_user }}"
+    group: "{{ os_group }}"
+    mode: '0755'
+  loop: "{{ kafka_log_dirs.split(',') }}"
+
+- name: "[Kafka] Create server.properties configuration file"
+  ansible.builtin.template:
+    src: server.properties.j2
+    dest: "{{ kafka_install_dir }}/config/server.properties"
+    owner: "{{ kafka_user }}"
+    group: "{{ os_group }}"
+    mode: '0644'
+  notify: Restart Kafka

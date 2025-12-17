@@ -1,0 +1,6 @@
+---
+- name: Deploy Kafka Cluster
+  hosts: kafka_brokers
+  become: yes
+  roles:
+    - role: kafka

@@ -1,0 +1,13 @@
+# server.properties.j2
+broker.id={{ broker_id }}
+listeners=PLAINTEXT://:{{ listeners_port }}
+advertised.listeners={{ advertised_listeners_host }}
+zookeeper.connect={{ zk_connection_string }}
+log.dirs={{ kafka_log_dirs }}
+num.network.threads={{ num_network_threads }}
+num.io.threads={{ num_io_threads }}
+log.retention.hours={{ log_retention_hours }}
+log.segment.bytes={{ log_segment_bytes }}
+message.max.bytes={{ message_max_bytes }}
+auto.create.topics.enable={{ auto_create_topics_enable }}
+default.replication.factor={{ default_replication_factor }}

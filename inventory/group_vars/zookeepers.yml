@@ -1,0 +1,18 @@
+---
+# Zookeeper 專屬變數 / Zookeeper Specific Variables
+zk_version: "3.7.2"
+zk_download_url: "https://archive.apache.org/dist/zookeeper/zookeeper-{{ zk_version }}/apache-zookeeper-{{ zk_version }}-bin.tar.gz"
+zk_install_dir: "{{ global_install_dir }}/zookeeper"
+zk_user: zookeeper
+zk_data_dir: "{{ global_data_dir }}/zookeeper/data"
+zk_data_log_dir: "{{ global_log_dir }}/zookeeper/data/log"
+zk_log_dir: "{{ global_log_dir }}/zookeeper"
+zk_client_port: 2181
+zk_tick_time: 2000
+zk_init_limit: 10
+zk_sync_limit: 5
+zk_max_client_cnxns: 0
+zk_servers:
+  - "192.168.200.20"
+  - "192.168.200.21"
+  - "192.168.200.22"

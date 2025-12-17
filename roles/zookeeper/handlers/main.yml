@@ -1,0 +1,5 @@
+---
+- name: Restart Zookeeper
+  ansible.builtin.systemd:
+    name: zookeeper
+    state: restarted

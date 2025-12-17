@@ -1,0 +1,4 @@
+# This file can be used to list python requirements for ansible, if any.
+# Example:
+# ansible
+# jinja2

@@ -1,0 +1,27 @@
+---
+- name: "[Zookeeper] Create Zookeeper systemd service file"
+  ansible.builtin.template:
+    src: zookeeper.service.j2
+    dest: /etc/systemd/system/zookeeper.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Zookeeper
+
+- name: "[Zookeeper] Systemd daemon-reload"
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  when: "zookeeper_service_status.changed"
+
+- name: "[Zookeeper] Start and enable Zookeeper service"
+  ansible.builtin.systemd:
+    name: zookeeper
+    state: started
+    enabled: yes
+  register: zookeeper_service_status
+
+- name: "[Zookeeper] Wait for Zookeeper to be ready"
+  ansible.builtin.wait_for:
+    port: "{{ zk_client_port }}"
+    delay: 5
+    timeout: 60

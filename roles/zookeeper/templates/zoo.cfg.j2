@@ -1,0 +1,15 @@
+# zoo.cfg.j2
+tickTime={{ zk_tick_time }}
+initLimit={{ zk_init_limit }}
+syncLimit={{ zk_sync_limit }}
+dataDir={{ zk_data_dir }}
+dataLogDir={{ zk_data_log_dir }}
+clientPort={{ zk_client_port }}
+maxClientCnxns={{ zk_max_client_cnxns }}
+{% for server_ip in zk_servers %}
+{% if loop.index == zk_id %}
+server.{{ loop.index }}=0.0.0.0:2888:3888
+{% else %}
+server.{{ loop.index }}={{ server_ip }}:2888:3888
+{% endif %}
+{% endfor %}

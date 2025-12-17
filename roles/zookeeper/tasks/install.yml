@@ -1,0 +1,14 @@
+---
+- name: "[Zookeeper] Download and unarchive Zookeeper"
+  ansible.builtin.unarchive:
+    src: "{{ zk_download_url }}"
+    dest: "{{ global_install_dir }}"
+    remote_src: yes
+    creates: "{{ zk_install_dir }}/"
+
+- name: "[Zookeeper] Create a symlink to the Zookeeper directory"
+  ansible.builtin.file:
+    src: "{{ global_install_dir }}/apache-zookeeper-{{ zk_version }}-bin"
+    dest: "{{ zk_install_dir }}"
+    state: link
+    force: yes

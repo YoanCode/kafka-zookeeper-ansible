@@ -1,0 +1,27 @@
+---
+- name: "[Kafka] Create Kafka systemd service file"
+  ansible.builtin.template:
+    src: kafka.service.j2
+    dest: /etc/systemd/system/kafka.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Kafka
+
+- name: "[Kafka] Systemd daemon-reload"
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  when: "kafka_service_status.changed"
+
+- name: "[Kafka] Start and enable Kafka service"
+  ansible.builtin.systemd:
+    name: kafka
+    state: started
+    enabled: yes
+  register: kafka_service_status
+
+- name: "[Kafka] Wait for Kafka to be ready"
+  ansible.builtin.wait_for:
+    port: "{{ listeners_port }}"
+    delay: 10
+    timeout: 60

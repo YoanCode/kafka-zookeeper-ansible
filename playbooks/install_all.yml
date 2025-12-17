@@ -1,0 +1,13 @@
+---
+## 執行 ansible-playbook -i inventory/hosts.ini playbooks/install_all.yml
+- name: Deploy Zookeeper Cluster
+  hosts: zookeepers
+  become: yes
+  roles:
+    - role: zookeeper
+
+- name: Deploy Kafka Cluster
+  hosts: kafka_brokers
+  become: yes
+  roles:
+    - role: kafka

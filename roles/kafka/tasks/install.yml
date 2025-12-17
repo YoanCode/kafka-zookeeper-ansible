@@ -1,0 +1,14 @@
+---
+- name: "[Kafka] Download and unarchive Kafka"
+  ansible.builtin.unarchive:
+    src: "{{ kafka_download_url }}"
+    dest: "{{ global_install_dir }}"
+    remote_src: yes
+    creates: "{{ kafka_install_dir }}/"
+
+- name: "[Kafka] Create a symlink to the Kafka directory"
+  ansible.builtin.file:
+    src: "{{ global_install_dir }}/kafka_2.13-{{ kafka_version }}"
+    dest: "{{ kafka_install_dir }}"
+    state: link
+    force: yes

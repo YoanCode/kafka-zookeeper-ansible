@@ -1,0 +1,12 @@
+---
+- name: Include install tasks
+  import_tasks: install.yml
+  tags: [kafka, kafka-install]
+
+- name: Include configure tasks
+  import_tasks: configure.yml
+  tags: [kafka, kafka-configure]
+
+- name: Include systemd tasks
+  import_tasks: systemd.yml
+  tags: [kafka, kafka-systemd]
