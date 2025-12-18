@@ -1,7 +1,7 @@
 ---
 # Kafka Broker 專屬變數 / Kafka Broker Specific Variables
 kafka_version: "3.7.2"
-kafka_download_url: "http://192.168.200.30:8080/repo/kafka_2.13-{{ kafka_version }}.tgz"
+kafka_download_url: "http://192.168.200.30:8080/repo/kafka_2.12-{{ kafka_version }}.tgz"
 kafka_install_dir: "{{ global_install_dir }}/kafka"
 kafka_user: kafka
 zk_connection_string: "192.168.200.20:2181,192.168.200.21:2181,192.168.200.22:2181"
